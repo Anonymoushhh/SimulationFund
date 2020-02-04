@@ -1,0 +1,28 @@
+/* pages/achievement/achievement.wxss */
+.table {
+  border: 0px solid darkgray;
+  font-size: 13px;
+}
+
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 2.5rem;
+  align-items: center;
+}
+
+.th {
+  font-size: 14px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 2.5rem;
+  align-items: center;
+}
+
+.td {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}

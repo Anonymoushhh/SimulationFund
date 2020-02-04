@@ -1,0 +1,51 @@
+.table {
+  border: 0px solid darkgray;
+  font-size: 12px;
+
+}
+
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+
+.td {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.bg-w {
+  background: snow;
+}
+
+.th {
+  width: 100%;
+  justify-content: center;
+  background: #fff;
+  color: #323233;
+  font-size: 13px;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+}
+
+.td1, .th1 {
+  width: 40%;
+}
+
+.td2, .td3, .td4, .th2, .th3, .th4 {
+  width: 20%;
+}
+
+.name {
+  width: 70%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: auto;
+}
+

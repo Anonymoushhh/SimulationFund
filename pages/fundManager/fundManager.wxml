@@ -1,0 +1,13 @@
+<!--pages/fundManager/fundManager.wxml-->
+<view class="container">
+  <van-nav-bar title="基金经理" left-text="返回" left-arrow bind:click-left="onClickLeft">
+  </van-nav-bar>
+  <van-cell icon="user-o" title-width="12%" title="简介" value="{{desc}}"/>
+
+    <van-cell-group>
+      <block wx:for="{{listData}}" wx:key="name">
+        <van-cell title-width="50%" title="{{item.name}}" value="{{item.value}}"/>
+      </block>
+    </van-cell-group>
+
+</view>

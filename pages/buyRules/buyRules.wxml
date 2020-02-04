@@ -1,0 +1,86 @@
+<!--pages/buyRules/buyRules.wxml-->
+<view class="container">
+  <van-nav-bar title="交易信息" left-text="返回" left-arrow bind:click-left="onClickLeft">
+  </van-nav-bar>
+  <van-tabs active="{{ active }}" animated>
+    <van-tab title="交易状态">
+      <block wx:for="{{tradeStatus}}" wx:key="name">
+        <van-cell title-width="40%" title="{{item.name}}" value="{{item.value}}" />
+      </block>
+    </van-tab>
+    <van-tab title="交易限制">
+      <block wx:for="{{tradeLimit}}" wx:key="name">
+        <van-cell title-width="60%" title="{{item.name}}" value="{{item.value}}" />
+      </block>
+    </van-tab>
+    <van-tab title="交易规则">
+      <van-cell title="买入规则" icon="balance-o" />
+      <van-steps steps="{{ purchaseSteps }}" active="{{ curPurchaseStep }}" active-icon="success" active-color="#38f" />
+      <van-cell title="卖出规则" icon="refund-o" />
+      <van-steps steps="{{ redeemSteps }}" active="{{ curRedeemStep }}" active-icon="success" active-color="#38f" />
+    </van-tab>
+    <van-tab title="费率">
+      <van-cell title="运作费率" icon="balance-o" />
+      <view class="table ">
+        <view class="tr tr1 ">
+          <view class="th th1 ">
+            <view>管理费</view>
+          </view>
+          <view class="th th1 ">
+            <view>托管费</view>
+          </view>
+          <view class="th th1 ">
+            <view>销售服务费</view>
+          </view>
+        </view>
+        <view class="tr tr1 ">
+          <view class="td th1 ">
+            <view>{{managerRate}}</view>
+          </view>
+          <view class="td th1 ">
+            <view>{{trusteeRate}}</view>
+          </view>
+          <view class="td th1 ">
+            <view>{{serviceRate}}</view>
+          </view>
+        </view>
+        <van-cell title="申购费率" icon="cash-on-deliver" />
+        <view class="table">
+          <view class="tr ">
+            <view class="th">
+              <view>买入金额</view>
+            </view>
+            <view class="th rate">
+              <view>费率</view>
+            </view>
+          </view>
+          <block wx:for="{{purchaseRate}}" wx:key="time">
+            <view class="tr">
+              <view class="td">{{item.applicableAmount}}</view>
+              <view class="td rate">{{item.rate}}</view>
+            </view>
+          </block>
+        </view>
+        <van-cell title="赎回费率" icon="balance-pay" />
+        <view class="table">
+          <view class="tr">
+            <view class="th ">
+              <view>持有时间</view>
+            </view>
+            <view class="th rate">
+              <view>费率</view>
+            </view>
+          </view>
+
+          <block wx:for="{{redeemRate}}" wx:key="time">
+            <view class="tr">
+              <view class="td">{{item.applicableTime}}</view>
+              <view class="td rate">{{item.rate}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </van-tab>
+  </van-tabs>
+
+</view>

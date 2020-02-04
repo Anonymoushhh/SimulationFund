@@ -1,0 +1,108 @@
+<!--pages/fundDetail/fundDetial.wxml-->
+<view class="container">
+  <van-nav-bar title="基金详情" left-text="返回" left-arrow bind:click-left="onClickLeft">
+  </van-nav-bar>
+  <view>
+    <van-cell-top-fundDetail title="{{fundName}}({{fundCode}})" risk="{{risk}}" minPurchaseAmount="{{minPurchaseAmount}}" star="{{star}}" type="{{type}}" border="{{ false }} " />
+  </view>
+  <view class="table ">
+    <view class="tr tr1 ">
+      <view class="th th1 ">
+        <view>单位净值</view>
+        <van-icon name="question-o " />
+      </view>
+      <view class="th th1 ">
+        <view>净值估算</view>
+        <van-icon name="question-o " />
+      </view>
+      <view class="th th1 ">
+        <view>累计净值</view>
+        <van-icon name="question-o " />
+      </view>
+    </view>
+    <view class="tr tr2 ">
+      <view class="th th2 ">
+        <view class="date ">{{date}}</view>
+      </view>
+      <view class="th th2 ">
+        <view class="date ">{{dateTime}}</view>
+      </view>
+      <view class="th th2 ">
+        <view class="date ">{{date}}</view>
+      </view>
+    </view>
+
+    <view class="tr bg-w ">
+      <view class="td">
+        <view class="net">{{unitNet}}
+          <block wx:if="{{isGainLastDay == true}}">
+            <van-tag type="danger">{{gainLastDay}}</van-tag>
+          </block>
+          <block wx:else>
+            <van-tag type="success">{{gainLastDay}}</van-tag>
+          </block>
+        </view>
+      </view>
+      <view class="td ">
+        <view class="net">{{estimatedNet}}
+          <block wx:if="{{isGainToday == true}}">
+            <van-tag type="danger">{{gainToday}}</van-tag>
+          </block>
+          <block wx:else>
+            <van-tag type="success">{{gainToday}}</van-tag>
+          </block>
+        </view>
+
+      </view>
+      <view class="td ">
+        <view class="net">{{accumulatedNet}}</view>
+      </view>
+    </view>
+    <van-tabs animated>
+      <van-tab title="业绩信息">
+        <view class="table ">
+          <view class="tr ">
+            <view class="th">
+              <view>时间</view>
+            </view>
+            <view class="th ">
+              <view>涨跌</view>
+            </view>
+            <view class="th">
+              <view>同类平均</view>
+            </view>
+            <view class="th">
+              <view>同类排名</view>
+            </view>
+          </view>
+
+          <block wx:for="{{listData}}" wx:key="time">
+            <view class="tr achievement">
+              <view class="td">{{item.time}}</view>
+              <view class="td">{{item.gain}}</view>
+              <view class="td">{{item.avg}}</view>
+              <view class="td">{{item.rank}}</view>
+            </view>
+          </block>
+        </view>
+        <van-button plain hairline size="small" type="default" block bind:click="more">查看更多</van-button>
+      </van-tab>
+      <van-tab title="业绩走势">敬请期待</van-tab>
+    </van-tabs>
+    <view>
+      <van-cell icon="description" size="large" is-link title="基金档案" is-link link-type="navigateTo" url="/pages/fundArchive/fundArchive" />
+      <van-cell-right icon="manager-o" size="large" is-link title="基金经理" value="{{managerName}}" is-link link-type="navigateTo" url="/pages/fundManager/fundManager" />
+      <van-cell icon="home-o" size="large" is-link title="基金公司" is-link link-type="navigateTo" url="/pages/fundCompany/fundCompany" />
+      <van-cell icon="shopping-cart-o" size="large" is-link title="交易信息" is-link link-type="navigateTo" url="/pages/buyRules/buyRules" />
+    </view>
+    <van-divider contentPosition="center" customStyle="color: #1989fa;border-color: #1989fa;font-size: 12px;">我是有底线的</van-divider>
+  </view>
+</view>
+<view>
+  <van-goods-action>
+    <van-goods-action-icon icon="add-o" text="加自选" dot bind:click="addOptional"/>
+    <van-toast id="van-toast" />
+    <van-goods-action-button text="定投" type="warning" />
+    <van-goods-action-button text="立即购买" />
+  </van-goods-action>
+</view>

@@ -1,0 +1,30 @@
+<!--pages/achievement/achievement.wxml-->
+<view class="container">
+  <van-nav-bar title="业绩详情" left-text="返回" left-arrow bind:click-left="onClickLeft">
+  </van-nav-bar>
+  <view class="table ">
+    <view class="tr ">
+      <view class="th">
+        <view>时间</view>
+      </view>
+      <view class="th ">
+        <view>涨跌</view>
+      </view>
+      <view class="th">
+        <view>同类平均</view>
+      </view>
+      <view class="th">
+        <view>同类排名</view>
+      </view>
+    </view>
+
+    <block wx:for="{{listData}}" wx:key="time">
+      <view class="tr achievement">
+        <view class="td">{{item.time}}</view>
+        <view class="td">{{item.gain}}</view>
+        <view class="td">{{item.avg}}</view>
+        <view class="td">{{item.rank}}</view>
+      </view>
+    </block>
+  </view>
+</view>

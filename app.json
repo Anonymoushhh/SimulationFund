@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/fundList/fundList",
+    "pages/fundArchive/fundArchive",
+    "pages/fundDetail/fundDetail",
+    "pages/fundManager/fundManager",
+    "pages/fundCompany/fundCompany",
+    "pages/buyRules/buyRules",
+    "pages/achievement/achievement"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "模拟基金",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-button": "/dist/button/index",
+    "van-tab": "/dist/tab/index",
+    "van-tabs": "/dist/tabs/index",
+    "van-dropdown-menu": "/dist/dropdown-menu/index",
+    "van-dropdown-item": "/dist/dropdown-item/index",
+    "van-icon": "/dist/icon/index",
+    "van-cell": "/dist/cell/index",
+    "van-cell-right": "/dist/cell-right/index",
+    "van-cell-top-fundDetail": "/dist/cell-top-fundDetail/index",
+    "van-cell-group": "/dist/cell-group/index",
+    "van-nav-bar": "/dist/nav-bar/index",
+    "van-grid": "/dist/grid/index",
+    "van-grid-item": "/dist/grid-item/index",
+    "van-panel": "/dist/panel/index",
+    "van-tag": "/dist/tag/index",
+    "van-goods-action": "/dist/goods-action/index",
+    "van-goods-action-icon": "/dist/goods-action-icon/index",
+    "van-goods-action-button": "/dist/goods-action-button/index",
+    "van-divider": "/dist/divider/index",
+    "van-sidebar": "/dist/sidebar/index",
+    "van-sidebar-item": "/dist/sidebar-item/index",
+    "van-steps": "/dist/steps/index",
+    "van-toast": "/dist/toast/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

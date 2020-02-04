@@ -1,0 +1,56 @@
+/* pages/fundDetail/fundDetial.wxss */
+
+.table {
+  border: 0px solid darkgray;
+  font-size: 12px;
+}
+
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+
+.td {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.tr1 {
+  background: snow;
+}
+
+.th {
+  width: 100%;
+  justify-content: center;
+  background: snow;
+  color: #323233;
+  font-size: 13px;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+}
+
+.th2 {
+  font-size: 12px;
+  height: 1rem;
+}
+
+.tr2 {
+  background: snow;
+  color: #323233;
+  height: 2rem;
+}
+
+.date {
+  font-size: 12px;
+  line-height: 18px;
+  color: #969799;
+}
+
+.achievement{
+    height: 2rem;
+}

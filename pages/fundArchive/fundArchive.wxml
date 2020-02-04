@@ -1,0 +1,23 @@
+<!--pages/fundArchive/fundArchive.wxml-->
+<view class="container">
+  <van-nav-bar title="基金档案" left-text="返回" left-arrow bind:click-left="onClickLeft">
+  </van-nav-bar>
+  <view class="tabs">
+    <van-tabs>
+      <van-tab title="基本信息">
+        <van-cell-group>
+          <block wx:for="{{listData}}" wx:key="name">
+            <van-cell title-width="30%" title="{{item.name}}" value="{{item.value}}" />
+          </block>
+        </van-cell-group>
+      </van-tab>
+      <van-tab title="持仓">
+        <van-cell-group>
+          <block wx:for="{{listData}}" wx:key="name">
+            <van-cell title-width="30%" title="{{item.name}}" value="{{item.value}}" />
+          </block>
+        </van-cell-group>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>
