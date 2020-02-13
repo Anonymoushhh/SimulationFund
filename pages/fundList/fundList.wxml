@@ -6,13 +6,13 @@
           <view class="tr bg-w">
             <view class="th th1">
               <van-dropdown-menu>
-                <van-dropdown-item value="{{curType}}" options="{{fundTypes}}" active-color="#ee0a24" bind:change="onSwitchType"/>
+                <van-dropdown-item value="{{curType}}" options="{{fundTypes}}" active-color="#ee0a24" bind:change="onSwitchType" />
               </van-dropdown-menu>
             </view>
             <view class="th th2">最新净值</view>
             <view class="th th3">
               <van-dropdown-menu>
-                <van-dropdown-item value="{{curGain}}" options="{{gain}}" active-color="#ee0a24" bind:change="onSwitchGain"/>
+                <van-dropdown-item value="{{curGain}}" options="{{gain}}" active-color="#ee0a24" bind:change="onSwitchGain" />
               </van-dropdown-menu>
             </view>
             <view class="th th4">详情</view>
@@ -26,7 +26,7 @@
               <view class="td td2">{{item.netValue}}</view>
               <view class="td td3">{{item.gain}}</view>
               <view class="td td4">
-                <van-icon name="arrow" bind:click="detail" />
+                <van-icon name="arrow" bind:click="onDetail" data-fundcode="{{item.fundCode}}" data-fundname="{{item.name}}" />
               </view>
             </view>
           </block>
@@ -57,7 +57,7 @@
               <view class="td td2">{{item.netValue}}</view>
               <view class="td td3">{{item.gain}}</view>
               <view class="td td4">
-                <van-icon name="arrow" bind:click="detail" />
+                <van-icon name="arrow" bind:click="onDetail" data-fundCode="{{item.fundCode}}" data-fundName="{{item.name}}" />
               </view>
             </view>
           </block>

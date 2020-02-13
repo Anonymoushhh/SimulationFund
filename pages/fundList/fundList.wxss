@@ -37,12 +37,14 @@
   width: 40%;
 }
 
-.td2, .td3, .td4, .th2, .th3, .th4 {
-  width: 20%;
+.td2, .td3, .th2, .th3  {
+  width: 23%;
 }
-
+.td4, .th4{
+  width: 14%;
+}
 .name {
-  width: 70%;
+  width: 90%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

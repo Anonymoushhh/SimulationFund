@@ -1,45 +1,51 @@
 // pages/fundList/fundList.js
+var util = require('../../utils/util.js')
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    listData: [{
-        "fundCode": "000000",
-        "name": "**公司**指数非常牛逼的基金",
-        "netValue": "1.0000",
-        "gain": "1.0000"
-      },
-      {
-        "fundCode": "******",
-        "name": "**公司**指数基金",
-        "netValue": "1.0000",
-        "gain": "1.0000"
-      },
-      {
-        "fundCode": "******",
-        "name": "**公司**指数基金",
-        "netValue": "1.0000",
-        "gain": "1.0000"
-      },
-      {
-        "fundCode": "******",
-        "name": "**公司**指数基金",
-        "netValue": "1.0000",
-        "gain": "1.0000"
-      }
-    ],
+    listData: [],
     fundTypes: [{
-        text: '混合型',
+        text: '股票型',
         value: 0
       },
       {
-        text: '指数型',
+        text: '债券型',
         value: 1
       },
       {
-        text: '债券型',
+        text: '货币型',
         value: 2
+      },
+      {
+        text: '混合型',
+        value: 3
+      },
+      {
+        text: '保本型',
+        value: 4
+      },
+      {
+        text: 'ETF',
+        value: 5
+      },
+      {
+        text: 'QDII',
+        value: 6
+      },
+      {
+        text: '分级基金',
+        value: 7
+      },
+      {
+        text: 'FOF',
+        value: 8
+      },
+      {
+        text: '指数型',
+        value: 9
       }
     ],
     gain: [{
@@ -73,29 +79,28 @@ Page({
       {
         text: '涨幅(3年)',
         value: 7
+      },
+      {
+        text: '今年来',
+        value: 8
+      },
+      {
+        text: '成立以来',
+        value: 9
       }
     ],
     curType: 0,
-    curGain: 0
+    curGain: 0,
+    curPage: 1,
+    pageSize: 10,
+    sortType: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.request({
-      url: 'test.php', //仅为示例，并非真实的接口地址
-      data: {
-        x: '',
-        y: ''
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data)
-      }
-    })
+    this.getRank()
   },
 
   /**
@@ -147,20 +152,49 @@ Page({
 
   },
 
-  detail: function(e) {
-    console.log(1);
+  onDetail: function(e) {
+    console.log(e.currentTarget.dataset);
+    var fundCode = e.currentTarget.dataset.fundcode;
+    var fundName = e.currentTarget.dataset.fundname;
+    wx.redirectTo({
+      url: '../fundDetail/fundDetail?fundCode=' + fundCode+'&fundName='+fundName
+    })
   },
+  getRank() {
+    wx.request({
+      url: app.globalData.baseProductUrlDev + "fundList/rank",
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      data: {
+        sortType: this.data.sortType,
+        fundType: this.data.curType,
+        gainType: this.data.curGain,
+        curPage: this.data.curPage,
+        pageSize: this.data.pageSize
+      },
+      success: (res) => {
+        this.setData({
+          listData: res.data.data
+        });
 
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    });
+  },
   onSwitchType: function(value) {
-    console.log(value.detail);
     this.setData({
       curType: value.detail
     });
+    this.getRank()
   },
-  onSwitchGain: function (value) {
-    console.log(value.detail);
+  onSwitchGain: function(value) {
     this.setData({
       curGain: value.detail
     });
-  }
+    this.getRank()
+  },
 })

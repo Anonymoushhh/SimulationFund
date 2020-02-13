@@ -9,10 +9,5 @@
   </view>
   <view class="usermotto">
     <button bindtap="fundList"> 列表页 </button>
-    <button bindtap="fundArchive"> 档案页 </button>
-    <button bindtap="fundDetail"> 详情页 </button>
-    <button bindtap="fundManager"> 基金经理页 </button>
-    <button bindtap="buyRules"> 购买规则页 </button>
-
   </view>
 </view>

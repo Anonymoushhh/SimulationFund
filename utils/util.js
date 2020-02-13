@@ -13,7 +13,23 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+function send(url, method, data, success, fail) {
+  wx.request({
+    url: url,
+    header: {
+      'content-type': 'application/json',
+    },
+    method: method,
+    data: data,
+    success(res) {
+      success(res);
+    },
+    fail(res) {
+      fail(res);
+    }
+  });
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  send:send,
 }

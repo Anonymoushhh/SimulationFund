@@ -1,35 +1,38 @@
 // pages/fundCompany/fundCompany.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    companyName:"天弘基金管理有限公司",
+    fundCode:undefined,
+    fundCompanyName:"---",
+    fundCompanyId:undefined,
     listData: [
       {
         "name": "公司简称",
-        "value": "天弘基金"
+        "value": "---"
       },
       {
       "name": "总经理",
-      "value": "郭树强"
+        "value": "---"
       },
       {
         "name": "管理规模",
-        "value": "12720.06亿元"
+        "value": "---"
       },
       {
         "name": "基金数量",
-        "value": "102只"
+        "value": "---"
       },
       {
         "name": "成立日期",
-        "value": "2004-11-07"
+        "value": "---"
       },
       {
         "name": "评级",
-        "value": "5星评级"
+        "value": "---"
       }
     ]
   },
@@ -38,7 +41,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      fundCode: options.fundCode
+    })
+    this.setData({
+      fundCompanyId: options.fundCompanyId
+    })
+    this.queryFundCompany()
   },
 
   /**
@@ -87,11 +96,34 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+  },
+  queryFundCompany(){
+    wx.request({
+      url: app.globalData.baseProductUrlDev + "fundCompany/fundCompanyInfoList",
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      data: {
+        fundCompanyId: this.data.fundCompanyId
+      },
+      success: (res) => {
+        var data = res.data.data;
+        console.log(res)
+        console.log(data)
+        this.setData({
+          fundCompanyName: data.fundCompanyName,
+          listData: data.listData
+        });
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    });
   },
   onClickLeft() {
     wx.redirectTo({
-      url: '/pages/fundDetail/fundDetail'
+      url: '/pages/fundDetail/fundDetail?fundCode='+this.data.fundCode
     })
   }
 })

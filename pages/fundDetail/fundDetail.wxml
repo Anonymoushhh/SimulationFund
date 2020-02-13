@@ -35,21 +35,21 @@
     <view class="tr bg-w ">
       <view class="td">
         <view class="net">{{unitNet}}
-          <block wx:if="{{isGainLastDay == true}}">
-            <van-tag type="danger">{{gainLastDay}}</van-tag>
+          <block wx:if="{{gainLastDay == true}}">
+            <van-tag type="danger">{{gainRangeLastDay}}</van-tag>
           </block>
           <block wx:else>
-            <van-tag type="success">{{gainLastDay}}</van-tag>
+            <van-tag type="success">{{gainRangeLastDay}}</van-tag>
           </block>
         </view>
       </view>
       <view class="td ">
         <view class="net">{{estimatedNet}}
-          <block wx:if="{{isGainToday == true}}">
-            <van-tag type="danger">{{gainToday}}</van-tag>
+          <block wx:if="{{gainToday == true}}">
+            <van-tag type="danger">{{gainRangeToday}}</van-tag>
           </block>
           <block wx:else>
-            <van-tag type="success">{{gainToday}}</van-tag>
+            <van-tag type="success">{{gainRangeToday}}</van-tag>
           </block>
         </view>
 
@@ -90,10 +90,10 @@
       <van-tab title="业绩走势">敬请期待</van-tab>
     </van-tabs>
     <view>
-      <van-cell icon="description" size="large" is-link title="基金档案" is-link link-type="navigateTo" url="/pages/fundArchive/fundArchive" />
-      <van-cell-right icon="manager-o" size="large" is-link title="基金经理" value="{{managerName}}" is-link link-type="navigateTo" url="/pages/fundManager/fundManager" />
-      <van-cell icon="home-o" size="large" is-link title="基金公司" is-link link-type="navigateTo" url="/pages/fundCompany/fundCompany" />
-      <van-cell icon="shopping-cart-o" size="large" is-link title="交易信息" is-link link-type="navigateTo" url="/pages/buyRules/buyRules" />
+      <van-cell icon="description" size="large" is-link title="基金档案" is-link link-type="redirectTo" url="/pages/fundArchive/fundArchive?fundCode={{fundCode}}" />
+      <van-cell-right icon="manager-o" size="large" is-link title="基金经理" value="{{managerNames}}" is-link link-type="redirectTo" url="/pages/fundManager/fundManager?fundCode={{fundCode}}&managerIds={{managerIds}}" />
+      <van-cell-right icon="home-o" size="large" is-link title="基金公司" is-link link-type="redirectTo" value="{{fundCompanyName}}" url="/pages/fundCompany/fundCompany?fundCode={{fundCode}}&fundCompanyId={{fundCompanyId}}" />
+      <van-cell icon="shopping-cart-o" size="large" is-link title="交易信息" is-link link-type="redirectTo" url="/pages/buyRules/buyRules?fundCode={{fundCode}}" />
     </view>
     <van-divider contentPosition="center" customStyle="color: #1989fa;border-color: #1989fa;font-size: 12px;">我是有底线的</van-divider>
   </view>

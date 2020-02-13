@@ -35,6 +35,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:"localhost:8080"
+    baseUrl:"localhost:8080",
+    baseProductUrlDev: 'http://localhost:8080/fundProduct/',
+    baseTradeUrlDev : 'localhost:8081/fundTrade/',
+    baseUrlProd : 'https://',
   }
 })

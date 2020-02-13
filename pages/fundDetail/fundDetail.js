@@ -1,27 +1,33 @@
 import Toast from '../../dist/toast/toast';
 // pages/fundDetail/fundDetial.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    unitNet: "1.0000",
-    estimatedNet: "1.0023",
-    accumulatedNet: "1.0000",
+    defaultData: "---",
+    defaultBoolean: true,
+    unitNet: "---",
+    estimatedNet: "---",
+    accumulatedNet: "---",
     date: "2020-01-23",
     dateTime: "2020-01-23 15:00",
-    fundName: "银河创新成长混合",
-    fundCode: "519674",
-    type: "混合型",
-    risk: "中高风险",
+    fundName: "---",
+    fundCode: "---",
+    type: "---",
+    risk: "---",
     minPurchaseAmount: "1000元起购",
-    star: "5星评级",
-    isGainToday: true,
-    isGainLastDay: true,
-    gainToday: "+2.30%",
-    gainLastDay: "+0.03%",
-    managerName: "郑巍山",
+    star: "---",
+    gainToday: true,
+    gainLastDay: true,
+    gainRangeToday: "---",
+    gainRangeLastDay: "---",
+    managerIds: [],
+    managerNames: "",
+    fundCompanyId: "",
+    fundCompanyName: "",
     listData: [{
         "time": "近1周",
         "gain": "+1.00%",
@@ -53,7 +59,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      fundCode: options.fundCode
+    })
+    this.queryTopMessage()
+    this.queryNet()
+    this.queryFooterMessage()
   },
 
   /**
@@ -103,6 +114,118 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  /**
+   * 净值查询
+   */
+  queryNet() {
+    wx.request({
+      url: app.globalData.baseProductUrlDev + "fundDetail/netValues",
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      data: {
+        fundCode: this.data.fundCode,
+      },
+      success: (res) => {
+        var data = res.data.data;
+        if (!data.unitNet) {
+          data.unitNet = this.defaultData
+        }
+        if (!data.accumulatedNet) {
+          data.accumulatedNet = this.data.defaultData
+        }
+        if (!data.estimatedNet) {
+          data.estimatedNet = this.data.defaultData
+        }
+        if (!data.gainToday) {
+          data.gainToday = this.data.defaultBoolean
+        }
+        if (!data.gainLastDay) {
+          data.gainLastDay = this.data.defaultBoolean
+        }
+        if (!data.gainRangeToday) {
+          console.log(this.data.defaultData)
+          data.gainRangeToday = this.data.defaultData
+        }
+        if (!data.gainRangeLastDay) {
+          data.gainRangeLastDay = this.data.defaultData
+        }
+        console.log(data)
+        this.setData({
+          unitNet: data.unitNet,
+          accumulatedNet: data.accumulatedNet,
+          estimatedNet: data.estimatedNet,
+          gainToday: data.gainToday,
+          gainLastDay: data.gainLastDay,
+          gainRangeToday: data.gainRangeToday,
+          gainRangeLastDay: data.gainRangeLastDay
+        });
+
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    });
+  },
+  /**
+ * topMessage查询
+ */
+  queryTopMessage() {
+    wx.request({
+      url: app.globalData.baseProductUrlDev + "fundDetail/topMessage",
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      data: {
+        fundCode: this.data.fundCode,
+      },
+      success: (res) => {
+        var data = res.data.data;
+        console.log(data)
+        this.setData({
+          fundName: data.fundName,
+          type: data.type,
+          risk: data.risk,
+          star: data.star
+        });
+
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    });
+  },
+  /**
+* footerMessage查询
+*/
+  queryFooterMessage() {
+    wx.request({
+      url: app.globalData.baseProductUrlDev + "fundDetail/footerMessage",
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      data: {
+        fundCode: this.data.fundCode,
+      },
+      success: (res) => {
+        var data = res.data.data;
+        console.log(data)
+        this.setData({
+          managerIds: data.managerIds,
+          managerNames: data.managerNames.join(","),
+          fundCompanyId: data.fundCompanyId,
+          fundCompanyName: data.fundCompanyName
+        });
+
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    });
   },
   onClickLeft() {
     wx.redirectTo({

@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    code:undefined,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -11,11 +12,22 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../logs/logs'
     })
   },
   onLoad: function () {
+    // 登录
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          console.log(res.code);
+          this.login()
+        } else {
+          console.log("error code " + res.errMsg);
+        }
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -43,6 +55,25 @@ Page({
       })
     }
   },
+  login(){
+    wx.request({
+      url: app.globalData.baseTradeUrlDev + "user/login",
+      header: {
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+      data: {
+        code: this.data.code,
+        userInfo:this.data.userInfo
+      },
+      success: (res) => {
+        console.log(res);
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    });
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -52,29 +83,9 @@ Page({
     })
   },
   fundList: function (e) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/fundList/fundList',
     })
   },
-  fundArchive: function (e) {
-    wx.navigateTo({
-      url: '/pages/fundArchive/fundArchive',
-    })
-  },
-  fundDetail: function (e) {
-    wx.navigateTo({
-      url: '/pages/fundDetail/fundDetail',
-    })
-  },
-  fundManager: function (e) {
-    wx.navigateTo({
-      url: '/pages/fundManager/fundManager',
-    })
-  },
-  buyRules: function (e) {
-    wx.navigateTo({
-      url: '/pages/buyRules/buyRules',
-    })
-  }
   
 })
